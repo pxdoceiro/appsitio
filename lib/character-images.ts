@@ -1,6 +1,6 @@
 /**
  * URLs das imagens dos personagens
- * Armazenadas em CDN para acesso rápido
+ * Armazenadas em CDN para acesso rapido
  */
 
 export const CHARACTER_IMAGES: Record<string, any> = {
@@ -17,7 +17,7 @@ export const CHARACTER_IMAGES: Record<string, any> = {
   conselheiro: "https://d2xsxph8kpxj0f.cloudfront.net/310519663178190688/227Tr5e5XhSrkLw7dbgkrB/character-conselheiro-2MhEBwRmn8Wu42iA75eJ8p.webp",
   quindim: "https://d2xsxph8kpxj0f.cloudfront.net/310519663178190688/227Tr5e5XhSrkLw7dbgkrB/character-quindim-PZsnXyM7amfWRtETCksEfv.webp",
 
-  // TURMA DO PERERÊ (Ziraldo)
+  // TURMA DO PERERE (Ziraldo)
   perepe: "https://d2xsxph8kpxj0f.cloudfront.net/310519663178190688/227Tr5e5XhSrkLw7dbgkrB/character-perepe-3ockHCG3waWddShrArrtvh.png",
   tininim: "https://d2xsxph8kpxj0f.cloudfront.net/310519663178190688/227Tr5e5XhSrkLw7dbgkrB/character-tininim_1280c2d4.png",
   galileu: "https://d2xsxph8kpxj0f.cloudfront.net/310519663178190688/227Tr5e5XhSrkLw7dbgkrB/character-galileu_fbcce129.png",
@@ -26,7 +26,7 @@ export const CHARACTER_IMAGES: Record<string, any> = {
   mae_docelina: "https://d2xsxph8kpxj0f.cloudfront.net/310519663178190688/227Tr5e5XhSrkLw7dbgkrB/character-mae-docelina_62833d47.png",
   boneca_de_piche: "https://d2xsxph8kpxj0f.cloudfront.net/310519663178190688/227Tr5e5XhSrkLw7dbgkrB/character-boneca-de-piche_e353963c.png",
 
-  // SÍTIO 2
+  // SITIO 2
   coronel_teodorico: "https://d2xsxph8kpxj0f.cloudfront.net/310519663178190688/227Tr5e5XhSrkLw7dbgkrB/character-coronel-teodorico_2e3c7c3d.png",
   principe_escamado: "https://d2xsxph8kpxj0f.cloudfront.net/310519663178190688/227Tr5e5XhSrkLw7dbgkrB/character-principe-escamado_da06fbb6.png",
   doutor_caramujo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663178190688/227Tr5e5XhSrkLw7dbgkrB/character-doutor-caramujo_1735dbdd.png",
@@ -55,15 +55,15 @@ export const CHARACTER_IMAGES: Record<string, any> = {
   seu_carlos: "https://d2xsxph8kpxj0f.cloudfront.net/310519663178190688/227Tr5e5XhSrkLw7dbgkrB/character-seu-carlos_1f9106a0.png",
 
   // A PRACA E NOSSA (Personagens)
-  joao_plenario: require("../assets/characters/praca/joao plenario.jpg"),
-  paulinho_gogo: require("../assets/characters/praca/paulinho gogo.jpg"),
+  joao_plenario: require("../assets/characters/praca/joao_plenario.jpg"),
+  paulinho_gogo: require("../assets/characters/praca/paulinho_gogo.jpg"),
   nina_praca: require("../assets/characters/praca/nina.jpeg"),
   sangue: require("../assets/characters/praca/sangue.jpg"),
   cabritotevez: require("../assets/characters/praca/cabritotevez.jpg"),
-  saideira: require("../assets/characters/praca/Saideira.jpg"),
-  gaudencio: require("../assets/characters/praca/Gaudencio.jpg"),
+  saideira: require("../assets/characters/praca/saideira.jpg"),
+  gaudencio: require("../assets/characters/praca/gaudencio.jpg"),
   bruna_feitoria: require("../assets/characters/praca/bruna-feitoria.jpg"),
-  joao_otimista: require("../assets/characters/praca/João Otimista.jpg"),
+  joao_otimista: require("../assets/characters/praca/joao_otimista.jpg"),
   aciumenta: require("../assets/characters/praca/aciumenta.jpg"),
   matheus_ceara: require("../assets/characters/praca/matheusceara.jpg"),
 };
