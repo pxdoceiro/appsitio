@@ -25,7 +25,6 @@ import { useCharacterResponse } from "@/hooks/use-character-response";
 import { CHARACTERS } from "@/lib/characters";
 import { CHARACTER_IMAGES } from "@/lib/character-images";
 import { getCustomCharacters, type CustomCharacter } from "@/lib/custom-characters";
-import { getResponseStyle, setResponseStyle, type ResponseStyle } from "@/lib/response-preferences";
 
 export default function ChatScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -38,7 +37,6 @@ export default function ChatScreen() {
   const [customPhotoUri, setCustomPhotoUri] = useState<string | null>(null);
   const [useCustomPhoto, setUseCustomPhoto] = useState(false);
   const [showAudioInput, setShowAudioInput] = useState(false);
-  const [responseStyle, setResponseStyleState] = useState<ResponseStyle>("curtas");
   const scrollViewRef = useRef<ScrollView>(null);
 
   const [character, setCharacter] = useState<any>(null);
@@ -62,18 +60,6 @@ export default function ChatScreen() {
 
     loadCharacter();
   }, [id]);
-
-  useEffect(() => {
-    let active = true;
-    getResponseStyle()
-      .then((style) => {
-        if (active) setResponseStyleState(style);
-      })
-      .catch(() => {});
-    return () => {
-      active = false;
-    };
-  }, []);
   const { messages, addMessage, isTyping, setIsTyping } = useChat(id || "");
   const { getResponse, isLoading } = useCharacterResponse(character!, {
     onResponse: async (text) => {
@@ -173,19 +159,7 @@ export default function ChatScreen() {
             </Text>
             <Text className="text-xs text-muted">Toque para mudar</Text>
           </Pressable>
-          <Pressable
-            onPress={async () => {
-              const nextStyle = responseStyle === "curtas" ? "medias" : "curtas";
-              setResponseStyleState(nextStyle);
-              await setResponseStyle(nextStyle);
-            }}
-            style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
-            className="rounded-full border border-border px-3 py-2"
-          >
-            <Text className="text-[11px] font-semibold text-foreground">
-              Respostas: {responseStyle === "curtas" ? "curtas" : "medias"}
-            </Text>
-          </Pressable>
+          <View className="w-12" />
         </View>
 
         {/* Messages Area */}

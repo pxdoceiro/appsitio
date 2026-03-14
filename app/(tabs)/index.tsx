@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect, useRouter } from "expo-router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   FlatList,
   Pressable,
@@ -9,7 +9,6 @@ import {
   TextInput,
   View,
   useWindowDimensions,
-  InteractionManager,
 } from "react-native";
 
 import { CharacterCard } from "@/components/character-card";
@@ -22,7 +21,6 @@ import {
   SITIO2_CHARACTERS,
   SITIO_CHARACTERS,
 } from "@/lib/characters";
-import { preloadCharacterImages } from "@/lib/image-cache";
 
 type HomeTab = "sitio" | "perepe" | "sitio2" | "arraial" | "personalizados" | "praca";
 
@@ -41,7 +39,6 @@ export default function HomeScreen() {
   const [searchText, setSearchText] = useState("");
   const [activeTab, setActiveTab] = useState<HomeTab>("sitio");
   const [groupCount, setGroupCount] = useState(0);
-  const lastPreloadKeyRef = useRef("");
 
   const loadData = useCallback(async () => {
     try {
@@ -81,19 +78,6 @@ export default function HomeScreen() {
   );
 
   const numColumns = width >= 1280 ? 3 : width >= 760 ? 2 : 1;
-
-  useEffect(() => {
-    const idsToPreload = filteredCharacters.slice(0, 12).map((character) => character.id);
-    const preloadKey = `${activeTab}:${idsToPreload.join(",")}`;
-    if (preloadKey === lastPreloadKeyRef.current) return;
-    lastPreloadKeyRef.current = preloadKey;
-
-    const task = InteractionManager.runAfterInteractions(() => {
-      preloadCharacterImages(idsToPreload).catch(() => {});
-    });
-
-    return () => task.cancel();
-  }, [activeTab, filteredCharacters]);
 
   return (
     <ScreenContainer className="flex-1 p-0" containerClassName="flex-1">

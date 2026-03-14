@@ -1,8 +1,7 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { trpc } from "@/lib/trpc";
 import { useTextToSpeech } from "./use-text-to-speech";
 import type { Character } from "@/lib/characters";
-import { getResponseStyle, type ResponseStyle } from "@/lib/response-preferences";
 
 interface UseCharacterResponseOptions {
   onResponse: (text: string) => void;
@@ -16,19 +15,6 @@ export function useCharacterResponse(
   const [isLoading, setIsLoading] = useState(false);
   const sendMessageMutation = trpc.chat.sendMessage.useMutation();
   const { speak } = useTextToSpeech(character);
-  const [responseStyle, setResponseStyle] = useState<ResponseStyle>("curtas");
-
-  useEffect(() => {
-    let active = true;
-    getResponseStyle()
-      .then((style) => {
-        if (active) setResponseStyle(style);
-      })
-      .catch(() => {});
-    return () => {
-      active = false;
-    };
-  }, []);
 
   const getResponse = useCallback(
     async (
@@ -38,19 +24,12 @@ export function useCharacterResponse(
       setIsLoading(true);
       try {
         // Chamar API via tRPC
-        const styleInstruction =
-          responseStyle === "curtas"
-            ? "Responda em 1-2 frases, direto e objetivo."
-            : "Responda em 2-4 frases, direto e objetivo.";
-        const maxTokens = responseStyle === "curtas" ? 160 : 240;
-
         const result = await sendMessageMutation.mutateAsync({
           characterId: character.id,
           characterName: character.displayName,
-          systemPrompt: `${character.systemPrompt}\n\n${styleInstruction}`,
+          systemPrompt: character.systemPrompt,
           messages: conversationHistory,
           userMessage: userMessage,
-          maxTokens,
         });
 
         if (result.success) {
@@ -78,7 +57,7 @@ export function useCharacterResponse(
         setIsLoading(false);
       }
     },
-    [character, options, responseStyle, sendMessageMutation, speak]
+    [character, options, sendMessageMutation, speak]
   );
 
   return {

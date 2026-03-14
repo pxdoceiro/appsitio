@@ -73,7 +73,6 @@ export const appRouter = router({
             })
           ),
           userMessage: z.string(),
-          maxTokens: z.number().int().min(32).max(512).optional(),
         })
       )
       .mutation(async ({ input }) => {
@@ -103,7 +102,6 @@ export const appRouter = router({
           // Chamar LLM para obter resposta
           const response = await invokeLLM({
             messages: llmMessages,
-            maxTokens: input.maxTokens,
           });
 
           // Extrair texto da resposta
