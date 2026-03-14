@@ -59,6 +59,7 @@ export type InvokeParams = {
   tool_choice?: ToolChoice;
   maxTokens?: number;
   max_tokens?: number;
+  model?: string;
   outputSchema?: OutputSchema;
   output_schema?: OutputSchema;
   responseFormat?: ResponseFormat;
@@ -266,8 +267,15 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     response_format,
   } = params;
 
+  const resolvedModel =
+    params.model && params.model.trim().length > 0
+      ? params.model
+      : ENV.forgeModel && ENV.forgeModel.trim().length > 0
+        ? ENV.forgeModel
+        : "openrouter/auto";
+
   const payload: Record<string, unknown> = {
-    model: ENV.forgeModel && ENV.forgeModel.trim().length > 0 ? ENV.forgeModel : "openrouter/auto",
+    model: resolvedModel,
     messages: messages.map(normalizeMessage),
   };
 
