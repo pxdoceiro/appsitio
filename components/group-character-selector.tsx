@@ -56,7 +56,11 @@ export function GroupCharacterSelector({
               )}
             >
               <Image
-                source={{ uri: CHARACTER_IMAGES[id] }}
+                source={
+                  typeof CHARACTER_IMAGES[id] === "string"
+                    ? { uri: CHARACTER_IMAGES[id] }
+                    : CHARACTER_IMAGES[id]
+                }
                 className="w-12 h-12 rounded-full"
               />
               <View className="flex-1">

@@ -5,7 +5,7 @@ interface MessageBubbleProps {
   text: string;
   isUser: boolean;
   timestamp?: Date;
-  characterImage?: string;
+  characterImage?: string | number;
 }
 
 export function MessageBubble({ text, isUser, timestamp, characterImage }: MessageBubbleProps) {
@@ -25,7 +25,9 @@ export function MessageBubble({ text, isUser, timestamp, characterImage }: Messa
     >
       {!isUser && characterImage && (
         <Image
-          source={{ uri: characterImage }}
+          source={
+            typeof characterImage === "string" ? { uri: characterImage } : characterImage
+          }
           className="w-8 h-8 rounded-full"
         />
       )}
