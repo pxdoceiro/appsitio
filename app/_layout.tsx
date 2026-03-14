@@ -6,7 +6,6 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
 import { Platform } from "react-native";
-import * as NavigationBar from "expo-navigation-bar";
 import "@/lib/_core/nativewind-pressable";
 import { ThemeProvider } from "@/lib/theme-provider";
 import {
@@ -37,14 +36,6 @@ export default function RootLayout() {
   // Initialize Manus runtime for cookie injection from parent container
   useEffect(() => {
     initManusRuntime();
-  }, []);
-
-  useEffect(() => {
-    if (Platform.OS !== "android") return;
-    NavigationBar.setVisibilityAsync("hidden").catch(() => {});
-    NavigationBar.setBehaviorAsync("overlay-swipe").catch(() => {});
-    NavigationBar.setPositionAsync("absolute").catch(() => {});
-    NavigationBar.setBackgroundColorAsync("transparent").catch(() => {});
   }, []);
 
   const handleSafeAreaUpdate = useCallback((metrics: Metrics) => {
