@@ -280,7 +280,13 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     payload.tool_choice = normalizedToolChoice;
   }
 
-  payload.max_tokens = 256;
+  const resolvedMaxTokens =
+    typeof params.maxTokens === "number"
+      ? params.maxTokens
+      : typeof params.max_tokens === "number"
+        ? params.max_tokens
+        : 256;
+  payload.max_tokens = resolvedMaxTokens;
 
   const normalizedResponseFormat = normalizeResponseFormat({
     responseFormat,
