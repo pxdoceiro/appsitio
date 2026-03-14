@@ -123,6 +123,8 @@ export default function ChatScreen() {
   };
 
   const currentPhotoUrl = useCustomPhoto && customPhotoUri ? customPhotoUri : CHARACTER_IMAGES[character.id];
+  const currentPhotoSource =
+    typeof currentPhotoUrl === "string" ? { uri: currentPhotoUrl } : currentPhotoUrl;
 
   return (
     <KeyboardAvoidingView
@@ -149,7 +151,7 @@ export default function ChatScreen() {
             style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
           >
             <Image
-              source={{ uri: currentPhotoUrl }}
+              source={currentPhotoSource}
               className="w-12 h-12 rounded-full mb-1 border-2 border-primary"
             />
             <Text className="text-sm font-bold text-foreground text-center">
@@ -256,10 +258,10 @@ export default function ChatScreen() {
 
             {/* Preview da foto atual */}
             <View className="items-center mb-6">
-              <Image
-                source={{ uri: currentPhotoUrl }}
-                className="w-32 h-32 rounded-lg border-2 border-primary"
-              />
+                <Image
+                  source={currentPhotoSource}
+                  className="w-32 h-32 rounded-lg border-2 border-primary"
+                />
               <Text className="text-sm text-muted mt-2">
                 {useCustomPhoto ? "Foto personalizada" : "Foto do sistema"}
               </Text>
