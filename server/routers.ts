@@ -100,20 +100,11 @@ export const appRouter = router({
             },
           ];
 
-          const attemptInvoke = async () =>
-            invokeLLM({
-              messages: llmMessages,
-              maxTokens: input.maxTokens,
-            });
-
-          let response;
-          try {
-            response = await attemptInvoke();
-          } catch (error) {
-            console.error("Erro ao chamar LLM (tentativa 1):", error);
-            await new Promise((resolve) => setTimeout(resolve, 800));
-            response = await attemptInvoke();
-          }
+          // Chamar LLM para obter resposta
+          const response = await invokeLLM({
+            messages: llmMessages,
+            maxTokens: input.maxTokens,
+          });
 
           // Extrair texto da resposta
           const responseText =
