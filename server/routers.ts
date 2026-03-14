@@ -100,11 +100,10 @@ export const appRouter = router({
             },
           ];
 
-          const attemptInvoke = async (overrideModel?: string) =>
+          const attemptInvoke = async () =>
             invokeLLM({
               messages: llmMessages,
               maxTokens: input.maxTokens,
-              model: overrideModel,
             });
 
           let response;
@@ -113,7 +112,7 @@ export const appRouter = router({
           } catch (error) {
             console.error("Erro ao chamar LLM (tentativa 1):", error);
             await new Promise((resolve) => setTimeout(resolve, 800));
-            response = await attemptInvoke("openrouter/auto");
+            response = await attemptInvoke();
           }
 
           // Extrair texto da resposta
